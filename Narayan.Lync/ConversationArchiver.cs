@@ -20,31 +20,36 @@ namespace Narayan.Lync
             {
                 System.IO.Directory.CreateDirectory(Configuration.FileArchivePath);
             }
-            converMgr = LyncClient.GetClient().ConversationManager;
-            converMgr.ConversationAdded += conversation_ConversationAdded;
-            conversationContent = new Dictionary<string, ConversationContext>();
+            try
+            {
+                var lyncClient = LyncClient.GetClient();
+                if (lyncClient != null)
+                {
+                    converMgr = lyncClient.ConversationManager;
+                    converMgr.ConversationAdded += conversation_ConversationAdded;
+                    conversationContent = new Dictionary<string, ConversationContext>();
+                }
+            }
+            catch (System.Exception exp)
+            {
+                throw new ApplicationException("Unable to get Lync Client.",exp);
+            }
         }
         
         public void Dispose()
         {
             Dispose(true);
-
-            // Use SupressFinalize in case a subclass 
-            // of this type implements a finalizer.
             GC.SuppressFinalize(this);
         }
 
         protected virtual void Dispose(bool disposing)
         {
-            // If you need thread safety, use a lock around these  
-            // operations, as well as in your methods that use the resource. 
             if (!_disposed)
             {
                 if (disposing)
                 {
                     
                 }
-                // Indicate that the instance has been disposed.
                 converMgr.ConversationAdded -= conversation_ConversationAdded;
                 converMgr = null;
                 conversationContent = null;
@@ -65,7 +70,6 @@ namespace Narayan.Lync
         private void conversation_ConversationAdded(object sender, ConversationManagerEventArgs e)
         {
             Conversation conversation = e.Conversation;
-
             conversation.ParticipantAdded += new EventHandler<ParticipantCollectionChangedEventArgs>(conversation_ParticipantAdded);
             conversation.ParticipantRemoved += new EventHandler<ParticipantCollectionChangedEventArgs>(conversation_ParticipantRemoved);
 
@@ -82,10 +86,8 @@ namespace Narayan.Lync
         {
             var modality = sender as InstantMessageModality;
             var participants = modality.Conversation.Participants;
-            //Caclulate Key
             
             string name = (string)modality.Participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
-            
             var convKey = calculateKey(participants);
             
             if (conversationContent.ContainsKey(convKey))
@@ -105,10 +107,8 @@ namespace Narayan.Lync
         {
             var modality = sender as InstantMessageModality;
             var participants = modality.Conversation.Participants;
-            //Caclulate Key
-
+            
             string name = (string)modality.Participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
-
             var convKey = calculateKey(participants);
 
             if (conversationContent.ContainsKey(convKey))
@@ -162,7 +162,6 @@ namespace Narayan.Lync
 
         private void conversation_ParticipantAdded(object sender, ParticipantCollectionChangedEventArgs e)
         {
-            //Conversation conversation = sender as Conversation;
             Participant otherParty = e.Participant;
             if (!e.Participant.IsSelf)
             {

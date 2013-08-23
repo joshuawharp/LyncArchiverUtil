@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+	<Product Id="*" Name="LyncArchivingService" Language="1033" Version="1.0.0.0" Manufacturer="BeSoPe" UpgradeCode="48dc066c-97cc-4512-8fa3-52bbe195e075">
+		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+		<MediaTemplate />
+		<Feature Id="ProductFeature" Title="LyncArchivingService" Level="1">
+			<ComponentGroupRef Id="ProductComponents" />
+		</Feature>
+	</Product>
+	<Fragment>
+		<Directory Id="TARGETDIR" Name="SourceDir">
+			<Directory Id="ProgramFilesFolder">
+				<Directory Id="INSTALLFOLDER" Name="LyncArchivingService" />
+			</Directory>
+		</Directory>
+	</Fragment>
+	<Fragment>
+		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">			
+			<Component Id="ProductComponent">
+				<!--<File Id="Insert dll name" Name="Insert dll name again" Source="Insert path to dll" Vital="yes" KeyPath="no" DiskId="1"/>-->
+				<File Id="Narayan.Lync.ArchivingService.exe" Name="Narayan.Lync.ArchivingService.exe" Source="..\Narayan.Lync.ArchivingService\bin\Release\Narayan.Lync.ArchivingService.exe" Vital="yes" KeyPath="yes" DiskId="1"/>
+				<ServiceInstall
+					Id="ServiceInstaller"
+					Type="ownProcess"
+					Vital="yes"
+					Name="LyncArchivingService"
+					DisplayName="Lync Archiving Service"
+					Description="Lync Archiving Service to intercept and archive IM text in file system or Outlook Inbox or Google Documents"
+					Start="auto"
+					Account="LocalSystem"
+					ErrorControl="ignore"
+					Interactive="no"
+              >
+				</ServiceInstall>
+				<ServiceControl Id="StartService" Start="install" Stop="both" Remove="uninstall" Name="LyncArchivingService" Wait="yes" />
+			</Component>
+
+		</ComponentGroup>
+	</Fragment>
+</Wix>
