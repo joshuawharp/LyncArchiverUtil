@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.IO;
 
-namespace Narayan.Lync
+namespace Lync.Archiver
 {
     public class FileArchiver:IArchiver
     {

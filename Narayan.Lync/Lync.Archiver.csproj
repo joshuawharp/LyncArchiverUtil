@@ -7,8 +7,8 @@
     <ProjectGuid>{2566F4F7-72F0-4AF5-9980-165E762A7BA9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Narayan.Lync</RootNamespace>
-    <AssemblyName>Narayan.Lync</AssemblyName>
+    <RootNamespace>Lync.Archiver</RootNamespace>
+    <AssemblyName>Lync.Archiver</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Narayan.Lync
+namespace Lync.Archiver
 {
     public class OutlookArchiver:IArchiver
     {

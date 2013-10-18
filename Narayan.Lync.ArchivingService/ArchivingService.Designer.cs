@@ -1,4 +1,4 @@
-﻿namespace Narayan.Lync.ArchivingService
+﻿namespace Lync.Archiver.Service
 {
     partial class ArchivingService
     {

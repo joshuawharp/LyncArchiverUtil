@@ -4,7 +4,7 @@ using System.Linq;
 using System.ServiceProcess;
 using System.Text;
 
-namespace Narayan.Lync.ArchivingService
+namespace Lync.Archiver.Service
 {
     static class Program
     {

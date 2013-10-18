@@ -8,26 +8,36 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 
-using Narayan.Lync;
+using Lync.Archiver;
 
-namespace Narayan.Lync.ArchivingService
+namespace Lync.Archiver.Service
 {
     partial class ArchivingService : ServiceBase
     {
         ConversationArchiver convArch;
-        EventLog myLog;
+        static EventLog _myLog;
+        private EventLog myLog
+        {
+            get
+            {
+                if (myLog == null)
+                {
+                    _myLog = new EventLog();
+                    if (!EventLog.SourceExists("LyncArchivingService"))
+                    {
+                        EventLog.CreateEventSource("LyncArchivingService", "Lync Archiving Service");
+                    }
+
+                    myLog.Source = "LyncArchivingService";
+                }
+                return _myLog;
+            }
+        }
+
 
         public ArchivingService()
         {
             InitializeComponent();
-            myLog = new EventLog();
-
-            if (!EventLog.SourceExists("LyncArchivingService"))
-            {
-               EventLog.CreateEventSource("LyncArchivingService", "Lync Archiving Service");
-            }
-            
-            myLog.Source = "LyncArchivingService";
         }
 
         protected override void OnStart(string[] args)
@@ -38,7 +48,7 @@ namespace Narayan.Lync.ArchivingService
             }
             catch (System.Exception exp)
             {
-                myLog.WriteEntry(exp.Message + Environment.NewLine + exp.StackTrace);
+                myLog.WriteEntry(exp.Message??String.Empty + Environment.NewLine + exp.StackTrace??String.Empty);
             }
         }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model;
 
-namespace Narayan.Lync
+namespace Lync.Archiver
 {
     public class ConversationArchiver:IDisposable
     {

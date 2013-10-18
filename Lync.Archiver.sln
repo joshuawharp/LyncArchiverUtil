@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narayan.Lync", "Narayan.Lync\Narayan.Lync.csproj", "{2566F4F7-72F0-4AF5-9980-165E762A7BA9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lync.Archiver", "Narayan.Lync\Lync.Archiver.csproj", "{2566F4F7-72F0-4AF5-9980-165E762A7BA9}"
 EndProject
-Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Narayan.Lync.ArchivingService.Setup", "Narayan.Lync.ArchivingService.Setup\Narayan.Lync.ArchivingService.Setup.wixproj", "{39F23985-023C-472E-A1D1-9D5908C14358}"
+Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Lync.Archiver.Setup", "Narayan.Lync.ArchivingService.Setup\Lync.Archiver.Setup.wixproj", "{39F23985-023C-472E-A1D1-9D5908C14358}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Narayan.Lync.ArchivingService", "Narayan.Lync.ArchivingService\Narayan.Lync.ArchivingService.csproj", "{845261B6-4EB8-4B24-91CA-666F421DFE38}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lync.Archiver.Service", "Narayan.Lync.ArchivingService\Lync.Archiver.Service.csproj", "{845261B6-4EB8-4B24-91CA-666F421DFE38}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

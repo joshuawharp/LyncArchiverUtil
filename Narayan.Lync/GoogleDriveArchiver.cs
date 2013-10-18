@@ -8,7 +8,7 @@ using System.Text;
 //using Google.Apis.Drive.v2.Data;
 //using Google.Apis.Requests;
 
-namespace Narayan.Lync
+namespace Lync.Archiver
 {
     public class GoogleDriveArchiver:IArchiver
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{845261B6-4EB8-4B24-91CA-666F421DFE38}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Narayan.Lync.ArchivingService</RootNamespace>
-    <AssemblyName>Narayan.Lync.ArchivingService</AssemblyName>
+    <RootNamespace>Lync.Archiver.Service</RootNamespace>
+    <AssemblyName>Lync.Archiver.Service</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -120,9 +120,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narayan.Lync\Narayan.Lync.csproj">
+    <ProjectReference Include="..\Narayan.Lync\Lync.Archiver.csproj">
       <Project>{2566f4f7-72f0-4af5-9980-165e762a7ba9}</Project>
-      <Name>Narayan.Lync</Name>
+      <Name>Lync.Archiver</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

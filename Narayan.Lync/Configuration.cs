@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using SysConfig = System.Configuration;
 
-namespace Narayan.Lync
+namespace Lync.Archiver
 {
     public static class Configuration
     {

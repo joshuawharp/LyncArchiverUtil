@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Narayan.Lync.ConversationAutoSaver")]
+[assembly: AssemblyTitle("Lync.Archiver.ConversationAutoSaver")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("BeSoPe")]
-[assembly: AssemblyProduct("Narayan.Lync.ConversationAutoSaver")]
+[assembly: AssemblyProduct("Lync.Archiver.ConversationAutoSaver")]
 [assembly: AssemblyCopyright("Copyright © BeSoPe 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

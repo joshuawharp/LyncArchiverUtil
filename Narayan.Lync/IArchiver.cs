@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Narayan.Lync
+namespace Lync.Archiver
 {
     public interface IArchiver
     {
