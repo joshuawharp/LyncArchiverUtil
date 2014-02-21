@@ -7,8 +7,17 @@ namespace Lync.Archiver
 {
     public class ConversationContext
     {
-        public DateTime StartTime { get; private set; }
-        private StringBuilder Verses { get; set; }
+        public DateTime StartTime
+        {
+            get;
+            private set;
+        }
+        private StringBuilder Verses 
+        { 
+            get; 
+            set;
+        }
+
         public ConversationContext()
         {
             this.StartTime = DateTime.Now;
@@ -16,7 +25,7 @@ namespace Lync.Archiver
         }
         public void AddVerse(string sayer, string verse)
         {
-            Verses.Append(DateTime.Now.ToShortTimeString() + " " + sayer + ":" + verse + Environment.NewLine);
+            Verses.Append(DateTime.Now.ToShortTimeString() + " " + sayer + ":" + verse);
         }
 
         public String GetConversation()
