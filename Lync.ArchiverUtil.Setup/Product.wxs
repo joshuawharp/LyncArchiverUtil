@@ -1,30 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-	<Product Id="*" Name="Lync.ArchiverUtil.Setup" Language="1033" Version="1.0.0.0" Manufacturer="Comcast Cable" UpgradeCode="f4c20c96-274b-4be7-85f0-e4aca8782d9f">
-		<Package InstallerVersion="200" Compressed="yes" InstallScope="perMachine" />
+  <Product Id="*"
+           UpgradeCode="{77DA20FA-8DF6-4125-B465-6161C1A821C0}"
+           Version="1.0.0.0"
+           Language="1033"
+           Name="Lync Archiver Utility"
+           Manufacturer="BeSoPe">
+    <Package InstallerVersion="300" Compressed="yes"/>
+    <Media Id="1" Cabinet="Lync.ArchiverUtil.cab" EmbedCab="yes" />
 
-		<MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
-		<MediaTemplate />
+    <!-- The following three sections are from the How To: Add a File to Your Installer topic-->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="APPLICATIONROOTDIRECTORY" Name="Lync.ArchiverUtil"/>
+      </Directory>
+    
+      <!-- Auto-start via Registry -->
+      <Component Id="Lync.ArchiverUtil" Guid="{A6A61D38-9B72-4DC5-9B52-0BABFC64CEA9}">
+        <RegistryValue Id="MerAs.rst" Root="HKMU" Action="write"
+                       Key="Software\Microsoft\Windows\CurrentVersion\Run"
+                       Name="Lync Archiver Util"
+                       Value="[APPLICATIONROOTDIRECTORY]Lync.ArchiverUtil.exe"
+                       Type="string" />
+        <Condition>ASSISTANCE_START_VIA_REGISTRY</Condition>
+      </Component>
+    </Directory>
 
-		<Feature Id="ProductFeature" Title="Lync.ArchiverUtil.Setup" Level="1">
-			<ComponentGroupRef Id="ProductComponents" />
-		</Feature>
-	</Product>
+    <DirectoryRef Id="APPLICATIONROOTDIRECTORY">
+      <Component Id="Lync.ArchiverUtil.exe" Guid="{5A182C82-20EB-4449-9529-C22C68CAF1EC}">
+        <File Id="Lync.ArchiverUtil.exe" Source="..\Lync.ArchiverUtil\bin\Release\Lync.ArchiverUtil.exe" KeyPath="yes" Checksum="yes"/>
+      </Component>
+      <Component Id="Lync.Archiver.dll" Guid="{0120A521-8793-4E03-B11F-93C125797FA7}">
+        <File Id="Lync.Archiver.dll" Source="..\Lync.ArchiverUtil\bin\Release\Lync.Archiver.dll" KeyPath="no"/>
+      </Component>
+      <Component Id="Lync.ArchiverUtil.exe.config" Guid="{246303BB-720B-4AEE-8106-CF916C54074D}">
+        <File Id="Lync.ArchiverUtil.exe.config" Source="..\Lync.ArchiverUtil\bin\Release\Lync.ArchiverUtil.exe.config" KeyPath="no"/>
+      </Component>
+      <Component Id="Microsoft.Lync.Model.dll" Guid="{5C24B681-7858-4933-A3F3-ED0CA78DDC1D}">
+        <File Id="Microsoft.Lync.Model.dll" Source="..\Lync.ArchiverUtil\bin\Release\Microsoft.Lync.Model.dll" KeyPath="no"/>
+      </Component>
+      <Component Id="Microsoft.Lync.Model.xml" Guid="{8AF03E84-8256-4F07-B668-E0D61004C2FA}">
+        <File Id="Microsoft.Lync.Model.xml" Source="..\Lync.ArchiverUtil\bin\Release\Microsoft.Lync.Model.xml" KeyPath="no"/>
+      </Component>
+      <Component Id="Microsoft.Office.Uc.dll" Guid="{AE40C02B-834E-486B-A245-61FEC3DCA293}">
+        <File Id="Microsoft.Office.Uc.dll" Source="..\Lync.ArchiverUtil\bin\Release\Microsoft.Office.Uc.dll" KeyPath="no"/>
+      </Component>
+    </DirectoryRef>
 
-	<Fragment>
-		<Directory Id="TARGETDIR" Name="SourceDir">
-			<Directory Id="ProgramFilesFolder">
-				<Directory Id="INSTALLFOLDER" Name="Lync.ArchiverUtil" />
-			</Directory>
-		</Directory>
-	</Fragment>
+    <Feature Id="MainApplication" Title="Main Application" Level="1">
+      <ComponentRef Id="Lync.ArchiverUtil.exe" />
+      <ComponentRef Id="Lync.Archiver.dll" />
+      <ComponentRef Id="Lync.ArchiverUtil.exe.config" />
+      <ComponentRef Id="Microsoft.Lync.Model.dll" />
+      <ComponentRef Id="Microsoft.Lync.Model.xml" />
+      <ComponentRef Id="Microsoft.Office.Uc.dll" />
+      <ComponentRef Id="Lync.ArchiverUtil" />
+    </Feature>
 
-	<Fragment>
-		<ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
-			<!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
-			<!-- <Component Id="ProductComponent"> -->
-				<!-- TODO: Insert files, registry keys, and other resources here. -->
-			<!-- </Component> -->
-		</ComponentGroup>
-	</Fragment>
+    <!-- Step 2: Add UI to your installer / Step 4: Trigger the custom action -->
+    <UI>
+      <UIRef Id="WixUI_Minimal" />
+      <Publish Dialog="ExitDialog"
+          Control="Finish"
+          Event="DoAction"
+          Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
+    </UI>
+
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Lync Archiving Utility" />
+    <!-- Step 3: Include the custom action -->
+    <Property Id="WixShellExecTarget" Value="[#Lync.ArchiverUtil.exe]" />
+    <CustomAction Id="LaunchApplication"
+        BinaryKey="WixCA"
+        DllEntry="WixShellExec"
+        Impersonate="yes" />
+
+    <Property Id="ASSISTANCE_START_VIA_REGISTRY">1</Property>
+
+</Product>
 </Wix>

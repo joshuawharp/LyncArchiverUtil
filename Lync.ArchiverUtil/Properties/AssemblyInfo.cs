@@ -8,9 +8,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyTitle("Lync.ArchiverUtil")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Comcast Cable")]
+[assembly: AssemblyCompany("BeSoPe")]
 [assembly: AssemblyProduct("Lync.ArchiverUtil")]
-[assembly: AssemblyCopyright("Copyright © Comcast Cable 2014")]
+[assembly: AssemblyCopyright("Copyright © BeSoPe 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

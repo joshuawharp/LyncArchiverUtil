@@ -15,6 +15,7 @@
         {
             if (disposing && (components != null))
             {
+                convArch.Dispose();
                 components.Dispose();
             }
             base.Dispose(disposing);
