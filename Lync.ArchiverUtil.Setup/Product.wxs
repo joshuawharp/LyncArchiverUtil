@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            UpgradeCode="{77DA20FA-8DF6-4125-B465-6161C1A821C0}"
-           Version="1.0.0.0"
+           Version="1.0.0.1"
            Language="1033"
            Name="Lync Archiver Utility"
            Manufacturer="BeSoPe">
@@ -14,7 +14,24 @@
       <Directory Id="ProgramFilesFolder">
         <Directory Id="APPLICATIONROOTDIRECTORY" Name="Lync.ArchiverUtil"/>
       </Directory>
-    
+      <Directory Id="DesktopFolder" Name="Desktop">
+        <Component Id="ApplicationShortcutDesktop" Guid="{226664E3-C441-47A2-B20C-84257A2CD252}">
+          <Shortcut Id="ApplicationDesktopShortcut"
+             Name="ArchiverUtil"
+             Description="Shortcut to lync conversation archiver."
+             Target="[APPLICATIONROOTDIRECTORY]Lync.ArchiverUtil.exe"
+             WorkingDirectory="MYAPPDIRPROPERTY"/>
+          <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+          <RegistryValue
+            Root="HKCU"
+            Key="Software/Lync.ArchiverUtil"
+            Name="installed"
+            Type="integer"
+            Value="1"
+            KeyPath="yes"/>
+        </Component>
+      </Directory>
+
       <!-- Auto-start via Registry -->
       <Component Id="Lync.ArchiverUtil" Guid="{A6A61D38-9B72-4DC5-9B52-0BABFC64CEA9}">
         <RegistryValue Id="MerAs.rst" Root="HKMU" Action="write"
@@ -47,6 +64,8 @@
       </Component>
     </DirectoryRef>
 
+    
+
     <Feature Id="MainApplication" Title="Main Application" Level="1">
       <ComponentRef Id="Lync.ArchiverUtil.exe" />
       <ComponentRef Id="Lync.Archiver.dll" />
@@ -55,6 +74,7 @@
       <ComponentRef Id="Microsoft.Lync.Model.xml" />
       <ComponentRef Id="Microsoft.Office.Uc.dll" />
       <ComponentRef Id="Lync.ArchiverUtil" />
+      <ComponentRef Id="ApplicationShortcutDesktop"/>
     </Feature>
 
     <!-- Step 2: Add UI to your installer / Step 4: Trigger the custom action -->
@@ -76,5 +96,5 @@
 
     <Property Id="ASSISTANCE_START_VIA_REGISTRY">1</Property>
 
-</Product>
+  </Product>
 </Wix>

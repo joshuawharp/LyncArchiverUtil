@@ -21,7 +21,7 @@ namespace Lync.Archiver
                 fileName = fileName.Replace("__", "_");
                 fileName = fileName.Trim(new char[] { '_' });
 
-                var path = Configuration.FileArchivePath + fileName + ".conv";
+                var path = Configuration.FileArchivePath + fileName + Configuration.FileExtension;
                 var conversationText = convContext.GetConversation();
                 
                 if (!File.Exists(path))
