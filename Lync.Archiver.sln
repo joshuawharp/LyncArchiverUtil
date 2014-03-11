@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.30110.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lync.Archiver", "Narayan.Lync\Lync.Archiver.csproj", "{2566F4F7-72F0-4AF5-9980-165E762A7BA9}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lync.ArchiverUtil", "Lync.ArchiverUtil\Lync.ArchiverUtil.csproj", "{A0D9F6FA-A151-4758-9C1A-E385898C3D6B}"
 EndProject
 Project("{930C7802-8A8C-48F9-8165-68863BCCD9DD}") = "Lync.ArchiverUtil.Setup", "Lync.ArchiverUtil.Setup\Lync.ArchiverUtil.Setup.wixproj", "{09E294A4-09D5-4992-BEA2-DB7BE2A29417}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lync.Archiver", "Lync.Archiver\Lync.Archiver.csproj", "{2566F4F7-72F0-4AF5-9980-165E762A7BA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,18 +21,6 @@ Global
 		Release|x86 = Release|x86
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Win32.ActiveCfg = Debug|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Win32.ActiveCfg = Release|Any CPU
-		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|x86.ActiveCfg = Release|Any CPU
 		{A0D9F6FA-A151-4758-9C1A-E385898C3D6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A0D9F6FA-A151-4758-9C1A-E385898C3D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A0D9F6FA-A151-4758-9C1A-E385898C3D6B}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
@@ -59,6 +47,18 @@ Global
 		{09E294A4-09D5-4992-BEA2-DB7BE2A29417}.Release|Win32.Build.0 = Release|x86
 		{09E294A4-09D5-4992-BEA2-DB7BE2A29417}.Release|x86.ActiveCfg = Release|x86
 		{09E294A4-09D5-4992-BEA2-DB7BE2A29417}.Release|x86.Build.0 = Release|x86
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|Win32.ActiveCfg = Debug|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|Win32.ActiveCfg = Release|Any CPU
+		{2566F4F7-72F0-4AF5-9980-165E762A7BA9}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

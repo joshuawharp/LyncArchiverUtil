@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Text;
 
 //using Google.Apis.Drive.v2;
 //using Google.Apis.Drive.v2.Data;
@@ -10,7 +6,7 @@ using System.Text;
 
 namespace Lync.Archiver
 {
-    public class GoogleDriveArchiver:IArchiver
+    public class GoogleDriveArchiver : IArchiver
     {
         public void Save(string convKey, ConversationContext convContext)
         {

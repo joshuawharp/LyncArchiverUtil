@@ -1,41 +1,45 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
 using System.Diagnostics;
-
+using System.Windows.Forms;
 using Lync.Archiver;
 
 namespace Lync.ArchiverUtil
 {
-    public partial class dummyForm : Form
+    public partial class DummyForm : Form
     {
-        public dummyForm()
+        private static EventLog _myLog;
+        private ConversationArchiver convArch;
+
+        public DummyForm()
         {
             InitializeComponent();
         }
 
-        ConversationArchiver convArch;
-        static EventLog _myLog;
-        private EventLog myLog
+        private static EventLog myLog
         {
             get
             {
-                if (myLog == null)
+                if (_myLog == null)
                 {
                     _myLog = new EventLog();
                     if (!EventLog.SourceExists("LyncArchivingService"))
                     {
                         EventLog.CreateEventSource("LyncArchivingService", "Lync Archiving Service");
                     }
-
-                    myLog.Source = "LyncArchivingService";
+                    _myLog.Source = "LyncArchivingService";
                 }
                 return _myLog;
+            }
+        }
+
+        protected override CreateParams CreateParams
+        {
+            get
+            {
+                // Turn on WS_EX_TOOLWINDOW style bit
+                var cp = base.CreateParams;
+                cp.ExStyle |= 0x80;
+                return cp;
             }
         }
 
@@ -45,9 +49,9 @@ namespace Lync.ArchiverUtil
             {
                 convArch = new ConversationArchiver();
             }
-            catch (System.Exception exp)
+            catch (Exception exp)
             {
-                myLog.WriteEntry(exp.Message ?? String.Empty + Environment.NewLine + exp.StackTrace ?? String.Empty);
+                myLog.WriteEntry(exp.Message + Environment.NewLine + exp.StackTrace);
             }
         }
 
@@ -58,17 +62,7 @@ namespace Lync.ArchiverUtil
 
         private void LyncArchiveUtilMenu_Click(object sender, EventArgs e)
         {
-            this.Close();
-        }
-        protected override CreateParams CreateParams
-        {
-            get
-            {
-                // Turn on WS_EX_TOOLWINDOW style bit
-                CreateParams cp = base.CreateParams;
-                cp.ExStyle |= 0x80;
-                return cp;
-            }
+            Close();
         }
     }
 }

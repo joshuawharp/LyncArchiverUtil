@@ -62,16 +62,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="dummyForm.cs">
+    <Compile Include="DummyForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="dummyForm.Designer.cs">
-      <DependentUpon>dummyForm.cs</DependentUpon>
+    <Compile Include="DummyForm.Designer.cs">
+      <DependentUpon>DummyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="dummyForm.resx">
-      <DependentUpon>dummyForm.cs</DependentUpon>
+    <EmbeddedResource Include="DummyForm.resx">
+      <DependentUpon>DummyForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -97,12 +97,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Narayan.Lync\Lync.Archiver.csproj">
-      <Project>{2566f4f7-72f0-4af5-9980-165e762a7ba9}</Project>
-      <Name>Lync.Archiver</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4 %28x86 and x64%29</ProductName>
@@ -123,6 +117,12 @@
       <ProductName>Windows Installer 4.5</ProductName>
       <Install>true</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Lync.Archiver\Lync.Archiver.csproj">
+      <Project>{2566f4f7-72f0-4af5-9980-165e762a7ba9}</Project>
+      <Name>Lync.Archiver</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

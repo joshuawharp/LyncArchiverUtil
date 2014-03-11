@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Lync.Archiver
 {
     public static class ArchiveHelper
     {
-        static List<IArchiver> configuredArchivers;
+        private static readonly List<IArchiver> configuredArchivers;
+
         static ArchiveHelper()
         {
             configuredArchivers = new List<IArchiver>();

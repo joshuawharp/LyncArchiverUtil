@@ -1,6 +1,6 @@
 ﻿namespace Lync.ArchiverUtil
 {
-    partial class dummyForm
+    partial class DummyForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(dummyForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(DummyForm));
             this.LyncArchiveUtilNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.LyncArchiveUtilMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,7 +69,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "dummyForm";
+            this.Name = "DummyForm";
             this.Opacity = 0D;
             this.ShowIcon = false;
             this.ShowInTaskbar = false;
