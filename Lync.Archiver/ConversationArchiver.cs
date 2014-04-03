@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
+using Microsoft.Lync.Model.Conversation.AudioVideo;
 
 namespace Lync.Archiver
 {
@@ -73,12 +75,29 @@ namespace Lync.Archiver
             conversation.ParticipantAdded += conversation_ParticipantAdded;
             conversation.ParticipantRemoved += conversation_ParticipantRemoved;
 
+            // Available Modalities 
+            // None = 0,
+            // InstantMessage = 1,
+            // AudioVideo = 2,
+            // Reserved1 = 4,
+            // Reserved2 = 8,
+            // Invalid = -1,
+
+            // We use InstantMessage and AudioVideo
             if (e.Conversation.Modalities.ContainsKey(ModalityTypes.InstantMessage) &&
                 e.Conversation.Modalities[ModalityTypes.InstantMessage] != null)
             {
                 var imModality = (InstantMessageModality) e.Conversation.Modalities[ModalityTypes.InstantMessage];
                 imModality.InstantMessageReceived += conversation_InstantMessageSent;
             }
+
+            if (e.Conversation.Modalities.ContainsKey(ModalityTypes.AudioVideo) &&
+    e.Conversation.Modalities[ModalityTypes.AudioVideo] != null)
+            {
+                //var avModality = (AVModality)e.Conversation.Modalities[ModalityTypes.AudioVideo];
+                //avModality.+= conversation_InstantMessageSent;
+            }
+
 
             conversation.StateChanged += conversation_StateChanged;
         }
