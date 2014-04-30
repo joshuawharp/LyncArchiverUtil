@@ -15,6 +15,7 @@ namespace Lync.ArchiverUtil
             InitializeComponent();
         }
 
+// ReSharper disable once InconsistentNaming
         private static EventLog myLog
         {
             get
@@ -57,6 +58,7 @@ namespace Lync.ArchiverUtil
 
         private void dummyForm_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if (convArch!=null)
             convArch.Dispose();
         }
 

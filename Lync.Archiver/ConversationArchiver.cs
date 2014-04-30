@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
@@ -44,17 +43,25 @@ namespace Lync.Archiver
             GC.SuppressFinalize(this);
         }
 
+        ~ConversationArchiver()
+        {
+            Dispose(false);
+        }
         protected virtual void Dispose(bool disposing)
         {
             if (!disposed)
             {
                 if (disposing)
                 {
+                    if (converMgr != null)
+                    {
+                        converMgr.ConversationAdded -= conversation_ConversationAdded;
+                        converMgr = null;
+                    }
+                    conversationContent = null;
+                    disposed = true;
                 }
-                converMgr.ConversationAdded -= conversation_ConversationAdded;
-                converMgr = null;
-                conversationContent = null;
-                disposed = true;
+
             }
         }
 
@@ -94,10 +101,9 @@ namespace Lync.Archiver
             if (e.Conversation.Modalities.ContainsKey(ModalityTypes.AudioVideo) &&
     e.Conversation.Modalities[ModalityTypes.AudioVideo] != null)
             {
-                //var avModality = (AVModality)e.Conversation.Modalities[ModalityTypes.AudioVideo];
-                //avModality.+= conversation_InstantMessageSent;
+                var avModality = (AVModality)e.Conversation.Modalities[ModalityTypes.AudioVideo];
+                avModality.ModalityStateChanged += av_ModalityStateChanged;
             }
-
 
             conversation.StateChanged += conversation_StateChanged;
         }
@@ -112,6 +118,7 @@ namespace Lync.Archiver
             handleImAction(sender, e);
         }
 
+// ReSharper disable once InconsistentNaming
         private void handleImAction(object sender, MessageSentEventArgs e)
         {
             var modality = sender as InstantMessageModality;
@@ -123,20 +130,23 @@ namespace Lync.Archiver
 
             var name = (string) modality.Participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
             var convKey = calculateKey(participants);
+            update_Conversation(convKey, name, e.Text);
+        }
 
+        private void update_Conversation(string convKey,string name, string verse)
+        {
             if (conversationContent.ContainsKey(convKey))
             {
                 var onGoingConv = conversationContent[convKey];
-                onGoingConv.AddVerse(name, e.Text);
+                onGoingConv.AddVerse(name, verse);
             }
             else
             {
                 var newConv = new ConversationContext();
-                newConv.AddVerse(name, e.Text);
+                newConv.AddVerse(name, verse);
                 conversationContent.Add(convKey, newConv);
             }
         }
-
         private void conversation_StateChanged(object sender, ConversationStateChangedEventArgs e)
         {
             if (e.NewState != ConversationState.Terminated)
@@ -152,13 +162,16 @@ namespace Lync.Archiver
 
             try
             {
-                var convItem = conversationContent[convKey];
-
-                var archivers = ArchiveHelper.GetArchivers();
-                foreach (var arcer in archivers)
+                if (conversationContent.ContainsKey(convKey))
                 {
-                    var arcer1 = arcer;
-                    Parallel.Invoke(() => arcer1.Save(convKey, convItem));
+                    var convItem = conversationContent[convKey];
+
+                    var archivers = ArchiveHelper.GetArchivers();
+                    foreach (var arcer in archivers)
+                    {
+                        var arcer1 = arcer;
+                        Parallel.Invoke(() => arcer1.Save(convKey, convItem));
+                    }
                 }
             }
             finally
@@ -200,6 +213,22 @@ namespace Lync.Archiver
                 otherParty.Modalities[ModalityTypes.InstantMessage] == null) return;
             var imModality = (InstantMessageModality) otherParty.Modalities[ModalityTypes.InstantMessage];
             imModality.InstantMessageReceived -= conversation_InstantMessageReceived;
+        }
+
+        private void av_ModalityStateChanged(object sender, ModalityStateChangedEventArgs e)
+        {
+            var modality = sender as AVModality;
+
+            if (modality == null)
+                return;
+
+            var participants = modality.Conversation.Participants;
+
+            var name = (string) modality.Participant.Contact.GetContactInformation(ContactInformationType.DisplayName);
+            var convKey = calculateKey(participants);
+
+            var avStatus = e.NewState.ToString();
+            update_Conversation(convKey, name, avStatus);
         }
     }
 }

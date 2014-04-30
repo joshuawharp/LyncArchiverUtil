@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            UpgradeCode="{77DA20FA-8DF6-4125-B465-6161C1A821C0}"
-           Version="1.0.0.1"
+           Version="1.0.0.2"
            Language="1033"
            Name="Lync Archiver Utility"
            Manufacturer="BeSoPe">
@@ -56,9 +56,9 @@
       <Component Id="Microsoft.Lync.Model.dll" Guid="{5C24B681-7858-4933-A3F3-ED0CA78DDC1D}">
         <File Id="Microsoft.Lync.Model.dll" Source="..\Lync.ArchiverUtil\bin\Release\Microsoft.Lync.Model.dll" KeyPath="no"/>
       </Component>
-      <Component Id="Microsoft.Lync.Model.xml" Guid="{8AF03E84-8256-4F07-B668-E0D61004C2FA}">
+      <!--<Component Id="Microsoft.Lync.Model.xml" Guid="{8AF03E84-8256-4F07-B668-E0D61004C2FA}">
         <File Id="Microsoft.Lync.Model.xml" Source="..\Lync.ArchiverUtil\bin\Release\Microsoft.Lync.Model.xml" KeyPath="no"/>
-      </Component>
+      </Component>-->
       <Component Id="Microsoft.Office.Uc.dll" Guid="{AE40C02B-834E-486B-A245-61FEC3DCA293}">
         <File Id="Microsoft.Office.Uc.dll" Source="..\Lync.ArchiverUtil\bin\Release\Microsoft.Office.Uc.dll" KeyPath="no"/>
       </Component>
@@ -71,7 +71,7 @@
       <ComponentRef Id="Lync.Archiver.dll" />
       <ComponentRef Id="Lync.ArchiverUtil.exe.config" />
       <ComponentRef Id="Microsoft.Lync.Model.dll" />
-      <ComponentRef Id="Microsoft.Lync.Model.xml" />
+      <!--<ComponentRef Id="Microsoft.Lync.Model.xml" />-->
       <ComponentRef Id="Microsoft.Office.Uc.dll" />
       <ComponentRef Id="Lync.ArchiverUtil" />
       <ComponentRef Id="ApplicationShortcutDesktop"/>

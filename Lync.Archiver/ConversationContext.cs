@@ -16,7 +16,7 @@ namespace Lync.Archiver
 
         public void AddVerse(string sayer, string verse)
         {
-            Verses.Append(DateTime.Now.ToShortTimeString() + " " + sayer + ":" + verse);
+            Verses.Append(Environment.NewLine+ DateTime.Now.ToShortTimeString() + " " + sayer + ":" + verse);
         }
 
         public String GetConversation()
