@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Windows.Forms;
 using Lync.Archiver;
+using Microsoft.Win32;
 
 namespace Lync.ArchiverUtil
 {
@@ -32,7 +34,7 @@ namespace Lync.ArchiverUtil
                 return _myLog;
             }
         }
-
+ 
         protected override CreateParams CreateParams
         {
             get
@@ -48,7 +50,35 @@ namespace Lync.ArchiverUtil
         {
             try
             {
-                convArch = new ConversationArchiver();
+                var processName = String.Empty;
+                if (Registry.LocalMachine.OpenSubKey("SOFTWARE\\Microsoft\\Office\\15.0\\Lync") != null)
+                {
+                    processName = "lync";
+                }
+                else if (Registry.LocalMachine.OpenSubKey("SOFTWARE\\Wow6432Node\\Microsoft\\Communicator") != null)
+                {
+                    processName = "communicator";
+                }
+
+                do
+                {
+                    var lyncList = Process.GetProcessesByName(processName);
+                    if (lyncList.Length == 0)
+                    {
+                        Thread.Sleep(1000);
+                        continue;
+                    }
+
+                    if (!lyncList[0].Responding)
+                        continue;
+
+                    convArch = new ConversationArchiver();
+                    LyncArchiveUtilNotifyIcon.BalloonTipText = processName+" is running."+Environment.NewLine+"Conversations are now recording.";
+                    LyncArchiveUtilNotifyIcon.ShowBalloonTip(5000);
+
+                } while (convArch == null);
+
+
             }
             catch (Exception exp)
             {

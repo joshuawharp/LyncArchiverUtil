@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            UpgradeCode="{77DA20FA-8DF6-4125-B465-6161C1A821C0}"
-           Version="1.0.0.2"
+           Version="1.0.0.3"
            Language="1033"
            Name="Lync Archiver Utility"
            Manufacturer="BeSoPe">

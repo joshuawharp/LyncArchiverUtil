@@ -39,6 +39,7 @@
             // 
             // LyncArchiveUtilNotifyIcon
             // 
+            this.LyncArchiveUtilNotifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info;
             this.LyncArchiveUtilNotifyIcon.ContextMenuStrip = this.LyncArchiveUtilMenu;
             this.LyncArchiveUtilNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("LyncArchiveUtilNotifyIcon.Icon")));
             this.LyncArchiveUtilNotifyIcon.Text = "Lync Archiver Utility";
@@ -60,7 +61,7 @@
             this.Exit.Size = new System.Drawing.Size(67, 22);
             this.Exit.Text = "Exit";
             // 
-            // dummyForm
+            // DummyForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
