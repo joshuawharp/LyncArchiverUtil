@@ -11,13 +11,13 @@ namespace Lync.ArchiverUtil
     {
         private static EventLog _myLog;
         private ConversationArchiver convArch;
+        private string notofyIconText = "Lync Archiver Utility";
 
         public DummyForm()
         {
             InitializeComponent();
         }
 
-// ReSharper disable once InconsistentNaming
         private static EventLog myLog
         {
             get
@@ -66,6 +66,8 @@ namespace Lync.ArchiverUtil
                     if (lyncList.Length == 0)
                     {
                         Thread.Sleep(1000);
+                        LyncArchiveUtilNotifyIcon.Text = notofyIconText + " is waiting for 'Lync/Skype for business' to be launched.";
+                        //LyncArchiveUtilNotifyIcon.ShowBalloonTip(5000);
                         continue;
                     }
 
@@ -73,6 +75,7 @@ namespace Lync.ArchiverUtil
                         continue;
 
                     convArch = new ConversationArchiver();
+                    LyncArchiveUtilNotifyIcon.Text = notofyIconText;
                     LyncArchiveUtilNotifyIcon.BalloonTipText = processName+" is running."+Environment.NewLine+"Conversations are now recording.";
                     LyncArchiveUtilNotifyIcon.ShowBalloonTip(5000);
 
