@@ -72,7 +72,10 @@ namespace Lync.ArchiverUtil
                     }
 
                     if (!lyncList[0].Responding)
+                    {
+                        Thread.Sleep(1000);
                         continue;
+                    }
 
                     convArch = new ConversationArchiver();
                     LyncArchiveUtilNotifyIcon.Text = notofyIconText;
@@ -91,8 +94,15 @@ namespace Lync.ArchiverUtil
 
         private void dummyForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (convArch!=null)
-            convArch.Dispose();
+            try
+            {
+                if (convArch != null)
+                    convArch.Dispose();
+            }
+            catch (Exception exp)
+            {
+                myLog.WriteEntry(exp.Message + Environment.NewLine + exp.StackTrace);
+            }
         }
 
         private void LyncArchiveUtilMenu_Click(object sender, EventArgs e)

@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model.Conversation.AudioVideo;
+using Microsoft.Win32;
 
 namespace Lync.Archiver
 {
@@ -29,6 +30,7 @@ namespace Lync.Archiver
                     converMgr.ConversationAdded += conversation_ConversationAdded;
 
                     conversationContent = new Dictionary<string, ConversationContext>();
+                    SystemEvents.PowerModeChanged += OnPowerChange;
                 }
             }
             catch (Exception exp)
@@ -110,16 +112,15 @@ namespace Lync.Archiver
 
         private void conversation_InstantMessageSent(object sender, MessageSentEventArgs e)
         {
-            handleImAction(sender, e);
+            handle_ImAction(sender, e);
         }
 
         private void conversation_InstantMessageReceived(object sender, MessageSentEventArgs e)
         {
-            handleImAction(sender, e);
+            handle_ImAction(sender, e);
         }
 
-// ReSharper disable once InconsistentNaming
-        private void handleImAction(object sender, MessageSentEventArgs e)
+        private void handle_ImAction(object sender, MessageSentEventArgs e)
         {
             var modality = sender as InstantMessageModality;
 
@@ -229,6 +230,17 @@ namespace Lync.Archiver
 
             var avStatus = e.NewState.ToString();
             update_Conversation(convKey, name, avStatus);
+        }
+
+        private void OnPowerChange(object s, PowerModeChangedEventArgs e)
+        {
+            switch (e.Mode)
+            {
+                case PowerModes.Resume:
+                    break;
+                case PowerModes.Suspend:
+                    break;
+            }
         }
     }
 }
