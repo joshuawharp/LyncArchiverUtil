@@ -4,6 +4,7 @@ using System.Threading;
 using System.Windows.Forms;
 using Lync.Archiver;
 using Microsoft.Win32;
+using System.IO;
 
 namespace Lync.ArchiverUtil
 {
@@ -104,8 +105,16 @@ namespace Lync.ArchiverUtil
                 myLog.WriteEntry(exp.Message + Environment.NewLine + exp.StackTrace);
             }
         }
+        
+        private void LyncArchiveUtilMenuItem_OpenConversationArchveFolder_Click(object sender, EventArgs e)
+        {
+            if (Directory.Exists(Configuration.FileArchivePath))
+                Process.Start(Configuration.FileArchivePath);
+            else
+                MessageBox.Show("Conversation archive folder is not yet created.","",MessageBoxButtons.OK,MessageBoxIcon.Warning);
+        }
 
-        private void LyncArchiveUtilMenu_Click(object sender, EventArgs e)
+        private void LyncArchiveUtilMenuItem_Exit_Click(object sender, EventArgs e)
         {
             Close();
         }

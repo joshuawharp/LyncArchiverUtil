@@ -1,4 +1,6 @@
-﻿namespace Lync.ArchiverUtil
+﻿using System;
+
+namespace Lync.ArchiverUtil
 {
     partial class DummyForm
     {
@@ -34,6 +36,7 @@
             this.LyncArchiveUtilNotifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.LyncArchiveUtilMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
+            this.OpenConversationArchiveFolder = new System.Windows.Forms.ToolStripMenuItem();
             this.LyncArchiveUtilMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,18 +51,28 @@
             // LyncArchiveUtilMenu
             // 
             this.LyncArchiveUtilMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Exit});
+            this.Exit,
+            this.OpenConversationArchiveFolder});
             this.LyncArchiveUtilMenu.Name = "contextMenuStrip1";
             this.LyncArchiveUtilMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.LyncArchiveUtilMenu.ShowImageMargin = false;
-            this.LyncArchiveUtilMenu.Size = new System.Drawing.Size(68, 26);
-            this.LyncArchiveUtilMenu.Click += new System.EventHandler(this.LyncArchiveUtilMenu_Click);
+            this.LyncArchiveUtilMenu.Size = new System.Drawing.Size(215, 48);
             // 
             // Exit
             // 
+            this.Exit.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.Exit.Name = "Exit";
-            this.Exit.Size = new System.Drawing.Size(67, 22);
+            this.Exit.Size = new System.Drawing.Size(214, 22);
             this.Exit.Text = "Exit";
+            this.Exit.Click += new System.EventHandler(this.LyncArchiveUtilMenuItem_Exit_Click);
+            // 
+            // OpenConversationArchveFolder
+            // 
+            this.OpenConversationArchiveFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.OpenConversationArchiveFolder.Name = "OpenConversationArchiveFolder";
+            this.OpenConversationArchiveFolder.Size = new System.Drawing.Size(214, 22);
+            this.OpenConversationArchiveFolder.Text = "Open Conversation Archive Folder";
+            this.OpenConversationArchiveFolder.Click += new System.EventHandler(this.LyncArchiveUtilMenuItem_OpenConversationArchveFolder_Click);
             // 
             // DummyForm
             // 
@@ -87,6 +100,7 @@
         private System.Windows.Forms.NotifyIcon LyncArchiveUtilNotifyIcon;
         private System.Windows.Forms.ContextMenuStrip LyncArchiveUtilMenu;
         private System.Windows.Forms.ToolStripMenuItem Exit;
+        private System.Windows.Forms.ToolStripMenuItem OpenConversationArchiveFolder;
     }
 }
 
