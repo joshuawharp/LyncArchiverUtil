@@ -2,7 +2,7 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*"
            UpgradeCode="{77DA20FA-8DF6-4125-B465-6161C1A821C0}"
-           Version="1.0.0.3"
+           Version="1.0.0.4"
            Language="1033"
            Name="Lync Archiver Utility"
            Manufacturer="BeSoPe">
@@ -86,7 +86,7 @@
           Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
     </UI>
 
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Lync Archiving Utility" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Lync Archiving Utility Ver 1.0.0.4" />
     <!-- Step 3: Include the custom action -->
     <Property Id="WixShellExecTarget" Value="[#Lync.ArchiverUtil.exe]" />
     <CustomAction Id="LaunchApplication"

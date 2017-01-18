@@ -12,8 +12,7 @@ namespace Lync.ArchiverUtil
     {
         private static EventLog _myLog;
         private ConversationArchiver convArch;
-        private string notofyIconText = "Lync Archiver Utility";
-
+        
         public DummyForm()
         {
             InitializeComponent();
@@ -49,6 +48,11 @@ namespace Lync.ArchiverUtil
 
         private void dummyForm_Load(object sender, EventArgs e)
         {
+            new Thread(Work).Start();
+        }
+
+        void Work()
+        {
             try
             {
                 var processName = String.Empty;
@@ -66,21 +70,23 @@ namespace Lync.ArchiverUtil
                     var lyncList = Process.GetProcessesByName(processName);
                     if (lyncList.Length == 0)
                     {
+                        //MessageBox.Show("1");
+                        LyncArchiveUtilNotifyIcon.SetNotifyIconText("Lync Archiver Utility is waiting for 'Lync/Skype for business' to start.");
                         Thread.Sleep(1000);
-                        LyncArchiveUtilNotifyIcon.Text = notofyIconText + " is waiting for 'Lync/Skype for business' to be launched.";
-                        //LyncArchiveUtilNotifyIcon.ShowBalloonTip(5000);
                         continue;
                     }
 
                     if (!lyncList[0].Responding)
                     {
+                        //MessageBox.Show("2");
                         Thread.Sleep(1000);
                         continue;
                     }
 
+                    //MessageBox.Show("3");
                     convArch = new ConversationArchiver();
-                    LyncArchiveUtilNotifyIcon.Text = notofyIconText;
-                    LyncArchiveUtilNotifyIcon.BalloonTipText = processName+" is running."+Environment.NewLine+"Conversations are now recording.";
+                    LyncArchiveUtilNotifyIcon.SetNotifyIconText("Lync Archiver Utility");
+                    LyncArchiveUtilNotifyIcon.BalloonTipText = processName + " is running." + Environment.NewLine + "Conversations are now recording.";
                     LyncArchiveUtilNotifyIcon.ShowBalloonTip(5000);
 
                 } while (convArch == null);
@@ -98,7 +104,9 @@ namespace Lync.ArchiverUtil
             try
             {
                 if (convArch != null)
+                {
                     convArch.Dispose();
+                }
             }
             catch (Exception exp)
             {
@@ -118,5 +126,6 @@ namespace Lync.ArchiverUtil
         {
             Close();
         }
+        
     }
 }

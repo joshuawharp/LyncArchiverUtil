@@ -6,6 +6,7 @@ using Microsoft.Lync.Model;
 using Microsoft.Lync.Model.Conversation;
 using Microsoft.Lync.Model.Conversation.AudioVideo;
 using Microsoft.Win32;
+using System.Linq;
 
 namespace Lync.Archiver
 {
@@ -31,6 +32,41 @@ namespace Lync.Archiver
 
                     conversationContent = new Dictionary<string, ConversationContext>();
                     SystemEvents.PowerModeChanged += OnPowerChange;
+
+                    // Conversations already opened
+                    if (converMgr.Conversations.Count > 0)
+                    {
+                        foreach (var preOpenedConversation in converMgr.Conversations)
+                        {
+                            preOpenedConversation.ParticipantAdded += conversation_ParticipantAdded;
+                            preOpenedConversation.ParticipantRemoved += conversation_ParticipantRemoved;
+
+                            // Available Modalities 
+                            // None = 0,
+                            // InstantMessage = 1,
+                            // AudioVideo = 2,
+                            // Reserved1 = 4,
+                            // Reserved2 = 8,
+                            // Invalid = -1,
+
+                            // We use InstantMessage and AudioVideo
+                            if (preOpenedConversation.Modalities.ContainsKey(ModalityTypes.InstantMessage) &&
+                                preOpenedConversation.Modalities[ModalityTypes.InstantMessage] != null)
+                            {
+                                var imModality = (InstantMessageModality)preOpenedConversation.Modalities[ModalityTypes.InstantMessage];
+                                imModality.InstantMessageReceived += conversation_InstantMessageSent;
+                            }
+
+                            if (preOpenedConversation.Modalities.ContainsKey(ModalityTypes.AudioVideo) &&
+                    preOpenedConversation.Modalities[ModalityTypes.AudioVideo] != null)
+                            {
+                                var avModality = (AVModality)preOpenedConversation.Modalities[ModalityTypes.AudioVideo];
+                                avModality.ModalityStateChanged += av_ModalityStateChanged;
+                            }
+
+                            preOpenedConversation.StateChanged += conversation_StateChanged;
+                        }
+                    }
                 }
             }
             catch (Exception exp)
@@ -57,6 +93,18 @@ namespace Lync.Archiver
                 {
                     if (converMgr != null)
                     {
+                        foreach(var convKey in conversationContent.Keys)
+                        {
+                            var convItem = conversationContent[convKey];
+
+                            var archivers = ArchiveHelper.GetArchivers();
+                            foreach (var arcer in archivers)
+                            {
+                                var arcer1 = arcer;
+                                Parallel.Invoke(() => arcer1.Save(convKey, convItem));
+                            }
+                        }
+
                         converMgr.ConversationAdded -= conversation_ConversationAdded;
                         converMgr = null;
                     }

@@ -17,7 +17,8 @@ namespace Lync.ArchiverUtil
         {
             if (disposing && (components != null))
             {
-                convArch.Dispose();
+                if (convArch != null)
+                    convArch.Dispose();
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -47,6 +48,7 @@ namespace Lync.ArchiverUtil
             this.LyncArchiveUtilNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("LyncArchiveUtilNotifyIcon.Icon")));
             this.LyncArchiveUtilNotifyIcon.Text = "Lync Archiver Utility";
             this.LyncArchiveUtilNotifyIcon.Visible = true;
+
             // 
             // LyncArchiveUtilMenu
             // 
@@ -66,7 +68,7 @@ namespace Lync.ArchiverUtil
             this.Exit.Text = "Exit";
             this.Exit.Click += new System.EventHandler(this.LyncArchiveUtilMenuItem_Exit_Click);
             // 
-            // OpenConversationArchveFolder
+            // OpenConversationArchiveFolder
             // 
             this.OpenConversationArchiveFolder.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
             this.OpenConversationArchiveFolder.Name = "OpenConversationArchiveFolder";
