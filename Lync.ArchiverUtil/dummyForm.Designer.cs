@@ -38,6 +38,7 @@ namespace Lync.ArchiverUtil
             this.LyncArchiveUtilMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.Exit = new System.Windows.Forms.ToolStripMenuItem();
             this.OpenConversationArchiveFolder = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.LyncArchiveUtilMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,17 +49,17 @@ namespace Lync.ArchiverUtil
             this.LyncArchiveUtilNotifyIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("LyncArchiveUtilNotifyIcon.Icon")));
             this.LyncArchiveUtilNotifyIcon.Text = "Lync Archiver Utility";
             this.LyncArchiveUtilNotifyIcon.Visible = true;
-
             // 
             // LyncArchiveUtilMenu
             // 
             this.LyncArchiveUtilMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.Exit,
-            this.OpenConversationArchiveFolder});
+            this.OpenConversationArchiveFolder,
+            this.toolStripSeparator1,
+            this.Exit});
             this.LyncArchiveUtilMenu.Name = "contextMenuStrip1";
             this.LyncArchiveUtilMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
             this.LyncArchiveUtilMenu.ShowImageMargin = false;
-            this.LyncArchiveUtilMenu.Size = new System.Drawing.Size(215, 48);
+            this.LyncArchiveUtilMenu.Size = new System.Drawing.Size(215, 54);
             // 
             // Exit
             // 
@@ -75,6 +76,11 @@ namespace Lync.ArchiverUtil
             this.OpenConversationArchiveFolder.Size = new System.Drawing.Size(214, 22);
             this.OpenConversationArchiveFolder.Text = "Open Conversation Archive Folder";
             this.OpenConversationArchiveFolder.Click += new System.EventHandler(this.LyncArchiveUtilMenuItem_OpenConversationArchveFolder_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(211, 6);
             // 
             // DummyForm
             // 
@@ -103,6 +109,7 @@ namespace Lync.ArchiverUtil
         private System.Windows.Forms.ContextMenuStrip LyncArchiveUtilMenu;
         private System.Windows.Forms.ToolStripMenuItem Exit;
         private System.Windows.Forms.ToolStripMenuItem OpenConversationArchiveFolder;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 

@@ -53,7 +53,7 @@ namespace Lync.Archiver
                 if (!fileInfo.LastWriteTime.Date.Equals(DateTime.Now.Date) || newFile)
                 {
                     streamWriter.WriteLine(
-                        "--------------------------------------------------------------------------------");
+                        Environment.NewLine+"--------------------------------------------------------------------------------");
                     streamWriter.WriteLine(DateTime.Now.ToString(CultureInfo.InvariantCulture));
                     streamWriter.WriteLine(
                         "--------------------------------------------------------------------------------");

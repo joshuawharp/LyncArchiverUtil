@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
-  <Product Id="*"
-           UpgradeCode="{77DA20FA-8DF6-4125-B465-6161C1A821C0}"
-           Version="1.0.0.4"
+  <Product Id="{703F9D11-F75A-4950-B0DC-98DB9BAE19DA}"
+           UpgradeCode="{EE164AB8-32A3-45E2-8FC6-1AF012FAD8ED}"
+           Version="!(bind.FileVersion.Lync.ArchiverUtil.exe)"
            Language="1033"
            Name="Lync Archiver Utility"
            Manufacturer="BeSoPe">
@@ -86,7 +86,7 @@
           Value="LaunchApplication">WIXUI_EXITDIALOGOPTIONALCHECKBOX = 1 and NOT Installed</Publish>
     </UI>
 
-    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Lync Archiving Utility Ver 1.0.0.4" />
+    <Property Id="WIXUI_EXITDIALOGOPTIONALCHECKBOXTEXT" Value="Launch Lync Archiving Utility Ver !(bind.FileVersion.Lync.ArchiverUtil.exe)" />
     <!-- Step 3: Include the custom action -->
     <Property Id="WixShellExecTarget" Value="[#Lync.ArchiverUtil.exe]" />
     <CustomAction Id="LaunchApplication"
@@ -95,6 +95,7 @@
         Impersonate="yes" />
 
     <Property Id="ASSISTANCE_START_VIA_REGISTRY">1</Property>
-
+    <!--http://stackoverflow.com/questions/1116228/can-i-set-a-custom-license-using-wix-->
+    <WixVariable Id="WixUILicenseRtf" Value="MIT.rtf" />
   </Product>
 </Wix>

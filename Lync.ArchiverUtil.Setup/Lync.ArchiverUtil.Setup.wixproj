@@ -50,6 +50,7 @@
   <ItemGroup>
     <Content Include="bin\Release\Lync.ArchiverUtil.Setup.msi" />
     <Content Include="bin\Release\Lync.ArchiverUtil.Setup.wixpdb" />
+    <Content Include="MIT.rtf" />
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <!--
